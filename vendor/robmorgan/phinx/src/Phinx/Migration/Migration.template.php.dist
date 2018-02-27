@@ -1,0 +1,31 @@
+<?php
+$namespaceDefinition
+
+use $useClassName;
+
+class $className extends $baseClassName {
+
+    protected $table = '$tableName';
+
+    /**
+     * Migrate Up.
+     */
+    public function up()
+    {
+        $this->keep();
+
+        $table = $this->table($this->table);
+        $table->addColumn('column', 'type')
+              ->save();
+
+        $this->checkData($this->keep) ? $this->insert($this->table, $this->keep) : false;
+    }
+    /**
+     * Migrate Down.
+     */
+    public function down()
+    {
+        $this->dropTable($this->table);
+    }
+
+}
